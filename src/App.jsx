@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { Header } from './components/Header'
 import { ListaSuper } from './components/ListaSuper'
+import { Login } from './components/Login'
 
 const PRODUCTOS = [
   {nombre: 'manzana', precio: 5},
@@ -13,30 +14,42 @@ const PRODUCTOS = [
 
 function App() {
   const [count, setCount] = useState(0)
+  const [Lista_super, setLista_super] = useState(false)
+  const [sesion, setSesion] = useState(false)
 
   return (
     <>
-      <div>
       <Header title ={"Hello react ccc:"} color ={"magenta"}/>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      {sesion ? 
+      <div>
+        
+        <div>
+        
+          <a href="https://vitejs.dev" target="_blank">
+            <img src={viteLogo} className="logo" alt="Vite logo" />
+          </a>
+          <a href="https://react.dev" target="_blank">
+            <img src={reactLogo} className="logo react" alt="React logo" />
+          </a>
+        </div>
+        <button onClick={() => setLista_super(!Lista_super)}>{Lista_super ? 'Ocultar lista' : 'Mostrar lista' }</button>
+
+        {Lista_super  ?
+          <ListaSuper productos={PRODUCTOS}/>
+          :<p>uwu</p>
+        }
+        
+        <div className="card">
+          <button onClick={() => setCount((count) => count + 1)}>
+            count is {count}
+          </button>
+        </div>
       </div>
-      <ListaSuper productos={PRODUCTOS}/>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      :
+      <div>
+        <Login/>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      }
     </>
   )
 }
