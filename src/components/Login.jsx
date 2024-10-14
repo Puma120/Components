@@ -5,20 +5,23 @@ const USER_LOGIN = {
     password: '12345'
 }
 
-export const Login = () => {
+export const Login = ({Loogin}) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [error, setError] = useState('Borrando system32...')
+    const [error, setError] = useState('')
 
     const handelSubmit = (e) => {
         e.preventDefault();
-    if (username === USER_LOGIN && password === USER_LOGIN)
+    if (username === USER_LOGIN.username && password === USER_LOGIN.password)
     {
         alert("Entraste")
         setError('')
+        Loogin()
     }
     else 
     {
+        console.log({username})
+        console.log({password})
         alert("quien sos")
         setPassword('')
         setUsername('')
@@ -51,7 +54,7 @@ export const Login = () => {
                         <br />
                         <button type = "submit">Iniciar sesion</button>
                 </div>
-                {error && <p style = {{color: 'red'}}>(error)</p>}
+                {error && <p style = {{color: 'red'}}>{error}</p>}
             </form>
         </div>
     )
